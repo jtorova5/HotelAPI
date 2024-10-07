@@ -1,4 +1,5 @@
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Bookings;
@@ -11,6 +12,7 @@ public class BookingsGetController : BookingsController
 
     // GET: api/v1/bookings/search/{identification_number}
     [HttpGet("search/{identification_number}")]
+    [Authorize]
     public async Task<IActionResult> GetAllBookingsById(int identification_number)
     {
         try
@@ -26,6 +28,7 @@ public class BookingsGetController : BookingsController
 
     // GET: api/v1/bookings/{id}
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetBookingById(int id)
     {
         try

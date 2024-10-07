@@ -1,6 +1,7 @@
 using HotelAPI.DTOs.Requests;
 using HotelAPI.Models;
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Bookings;
@@ -13,6 +14,7 @@ public class BookingsCreateController : BookingsController
 
     // POST: api/v1/bookings
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> AddBooking([FromBody] BookingDTO bookingDto)
     {
         if (!ModelState.IsValid)

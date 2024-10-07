@@ -1,8 +1,12 @@
+using System.Text;
 using DotNetEnv;
+using HotelAPI.Config;
 using HotelAPI.Data;
 using HotelAPI.Repositories;
 using HotelAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +33,27 @@ builder.Services.AddScoped<IGuestRepository, GuestServices>();
 builder.Services.AddScoped<IRoomRepository, RoomServices>();
 builder.Services.AddScoped<IRoomTypeRepository, RoomTypeServices>();
 
+builder.Services.AddSingleton<Utilities>();
+builder.Services.AddAuthentication(config =>
+{
+    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(config =>
+{
+    config.RequireHttpsMetadata = false;
+    config.SaveToken = true;
+    config.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
+        ValidateAudience = false,
+        ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.Zero,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY")!))
+    };
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -70,6 +95,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

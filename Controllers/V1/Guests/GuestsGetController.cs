@@ -1,4 +1,5 @@
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Guests;
@@ -11,6 +12,7 @@ public class GuestsGetController : GuestsController
 
     // GET: api/v1/guests
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllGuests()
     {
         try
@@ -30,6 +32,7 @@ public class GuestsGetController : GuestsController
 
     // GET: api/v1/guests/{id}
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetGuestById(int id)
     {
         try
@@ -49,6 +52,7 @@ public class GuestsGetController : GuestsController
 
     // GET: api/v1/guests/search/{keyword}
     [HttpGet("search/{keyword}")]
+    [Authorize]
     public async Task<IActionResult> GetGuestByKeyword([FromQuery] string keyword)
     {
         try

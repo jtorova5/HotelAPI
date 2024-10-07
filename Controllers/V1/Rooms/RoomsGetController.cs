@@ -1,4 +1,5 @@
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Rooms;
@@ -11,6 +12,7 @@ public class RoomsGetController : RoomsController
 
     // GET: api/v1/rooms
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllRooms()
     {
         try
@@ -49,6 +51,7 @@ public class RoomsGetController : RoomsController
 
     // GET: api/v1/rooms/occupied
     [HttpGet("occupied")]
+    [Authorize]
     public async Task<IActionResult> GetAllUnavailableRooms()
     {
         try
@@ -68,6 +71,7 @@ public class RoomsGetController : RoomsController
 
     // GET: api/v1/rooms/{id}
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetRoomById(int id)
     {
         try

@@ -1,5 +1,6 @@
 using HotelAPI.Models;
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Bookings;
@@ -12,6 +13,7 @@ public class BookingsDeleteController : BookingsController
 
     // DELETE: api/v1/bookings/{id}
     [HttpDelete("{id}")]
+    [Authorize]
     public async Task<IActionResult> DeleteBooking(int id)
     {
         try

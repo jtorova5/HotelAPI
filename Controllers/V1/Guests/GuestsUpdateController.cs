@@ -1,5 +1,6 @@
 using HotelAPI.DTOs.Requests;
 using HotelAPI.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HotelAPI.Controllers.V1.Guests;
@@ -12,6 +13,7 @@ public class GuestsUpdateController : GuestsController
 
     // PUT: api/v1/guests/{id}
     [HttpPut("{id}")]
+    [Authorize]
     public async Task<IActionResult> UpdateGuest(int id, [FromBody] GuestDTO guestDto)
     {
         if (!ModelState.IsValid)
