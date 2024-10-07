@@ -1,5 +1,7 @@
 using DotNetEnv;
 using HotelAPI.Data;
+using HotelAPI.Repositories;
+using HotelAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,11 @@ var conectionDB = $"server={dbHost};port={dbPort};database={dbDatabaseName};uid=
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(conectionDB, ServerVersion.Parse("8.0.20-mysql"))
 );
+
+builder.Services.AddScoped<IBookingRepository, BookingServices>();
+builder.Services.AddScoped<IGuestRepository, GuestServices>();
+builder.Services.AddScoped<IRoomRepository, RoomServices>();
+builder.Services.AddScoped<IRoomTypeRepository, RoomTypeServices>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
