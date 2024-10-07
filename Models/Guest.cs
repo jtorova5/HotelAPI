@@ -38,7 +38,7 @@ public class Guest
     public required string PhoneNumber { get; set; }
 
     [Column("birthdate")]
-    public DateTime Birthdate { get; set; }
+    public DateTime? Birthdate { get; set; }
 
     public Guest(string firstName, string lastName, string email, string identificationNumber, string phoneNumber, DateTime birthDate)
     {
@@ -49,17 +49,6 @@ public class Guest
         PhoneNumber = phoneNumber;
         Birthdate = birthDate;
     }
-
-        public Guest(string firstName, string lastName, string email, string identificationNumber, string phoneNumber)
-    {
-        FirstName = firstName;
-        LastName = lastName;
-        Email = email;
-        IdentificationNumber = identificationNumber;
-        PhoneNumber = phoneNumber;
-        Birthdate = DateTime.Now;
-    }
-
     public Guest()
     {
 
