@@ -18,7 +18,7 @@ public class Room
 
     [Required]
     [Column("price_per_night")]
-    [Range(1, 10000)]
+    [Range(0.01, double.MaxValue)]
     public double PricePerNight { get; set; }
 
     [Required]
