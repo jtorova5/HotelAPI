@@ -5,6 +5,7 @@ namespace HotelAPI.Controllers.V1.Guests;
 
 [ApiController]
 [Route("api/v1/guests")]
+[Tags("Guest")]
 public class GuestsDeleteController : GuestsController
 {
     public GuestsDeleteController(IGuestRepository guestRepository) : base(guestRepository) { }

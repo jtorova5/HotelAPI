@@ -4,16 +4,22 @@ using HotelAPI.Models;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace HotelAPI.Controllers.V1.Auth;
 
 [ApiController]
 [Route("api/v1/login")]
+[Tags("Auth")]
 public class LoginController(AppDbContext context, Utilities utilities) : ControllerBase
 {
     private readonly AppDbContext _context = context;
     private readonly Utilities _utilities = utilities;
     [HttpPost("register")]
+    [SwaggerOperation(
+        Summary = "Create an employee",
+        Description = "Create an employee with credentials"
+    )]
     public async Task<IActionResult> Register(Employee newUser)
     {
         if (!ModelState.IsValid)
@@ -30,6 +36,10 @@ public class LoginController(AppDbContext context, Utilities utilities) : Contro
         return Ok("Customer registered successfully");
     }
     [HttpPost("login")]
+    [SwaggerOperation(
+        Summary = "Allows to login",
+        Description = "Login and create a token"
+    )]
     public async Task<IActionResult> Login(LoginRequest request)
     {
         if (!ModelState.IsValid)

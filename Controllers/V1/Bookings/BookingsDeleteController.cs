@@ -7,6 +7,8 @@ namespace HotelAPI.Controllers.V1.Bookings;
 
 [ApiController]
 [Route("api/v1/bookings")]
+[Tags("Booking")]
+
 public class BookingsDeleteController : BookingsController
 {
     public BookingsDeleteController(IBookingRepository bookingRepository) : base(bookingRepository) { }

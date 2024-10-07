@@ -6,6 +6,7 @@ namespace HotelAPI.Controllers.V1.Rooms;
 
 [ApiController]
 [Route("api/v1/rooms")]
+[Tags("Rooms")]
 public class RoomsGetController : RoomsController
 {
     public RoomsGetController(IRoomRepository roomRepository) : base(roomRepository) { }

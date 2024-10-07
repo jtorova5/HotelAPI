@@ -5,6 +5,7 @@ namespace HotelAPI.Controllers.V1.RoomTypes;
 
 [ApiController]
 [Route("api/v1/room_types")]
+[Tags("RoomTypes")]
 public class RoomsTypesController : ControllerBase
 {
     protected readonly IRoomTypeRepository _roomTypeRepository;

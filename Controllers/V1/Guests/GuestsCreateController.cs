@@ -7,6 +7,7 @@ namespace HotelAPI.Controllers.V1.Guests;
 
 [ApiController]
 [Route("api/v1/guests")]
+[Tags("Guest")]
 public class GuestsCreateController : GuestsController
 {
     public GuestsCreateController(IGuestRepository guestRepository) : base(guestRepository) { }
